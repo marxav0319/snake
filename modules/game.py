@@ -1,7 +1,9 @@
 import sys
+import random
 import pygame
 
 from .snake import Snake
+from .cube import Cube
 
 DELAY = 50
 TICK = 10
@@ -17,18 +19,34 @@ class Game(object):
         self.width = width
         self.rows = rows
         self.snake = Snake(width, rows)
+        self.food = None
 
         pygame.init()
         self.game_window = pygame.display.set_mode((width, width))
         self.clock = pygame.time.Clock()
         self.game_loop()
 
+    def add_food(self):
+        """
+        """
+
+        not_valid_position = True
+        x_position = random.randrange(self.rows)
+        y_position = random.randrange(self.rows)
+        while not_valid_position:
+            result = any(segment == (x_position, y_position) for segment in self.snake.body)
+            if not result:
+                not_valid_position = False
+            else:
+                x_position = random.randrange(self.rows)
+                y_position = random.randrange(self.rows)
+        self.food = Cube(x_position, y_position, self.width, self.rows)
+
     def update(self):
         """
         """
 
         keys = pygame.key.get_pressed()
-
         if keys[pygame.K_ESCAPE]:
             pygame.quit()
             sys.exit(0)

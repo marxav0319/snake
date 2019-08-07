@@ -39,3 +39,14 @@ class Cube(object):
         current_y = (self.y_position * self.fill_area) + 1
         rect_details = [current_x, current_y, self.fill_area, self.fill_area]
         pygame.draw.rect(surface, self.color, rect_details)
+
+    def __eq__(self, other):
+        """
+        """
+
+        if isinstance(other, tuple):
+            return (self.x_position, self.y_position) == other
+        elif isinstance(other, Cube):
+            return (self.x_position, self.y_position) == (other.x_position, other.y_position)
+        else:
+            raise NotImplementedError
