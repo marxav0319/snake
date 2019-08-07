@@ -11,14 +11,25 @@ class Cube(object):
         self.x_position = x_position
         self.y_position = y_position
         self.color = (0, 255, 0)
+        self.width = width
+        self.rows = rows
         self.fill_area = width // rows
 
     def update(self, x_velocity, y_velocity):
         """
         """
 
-        self.x_position += x_velocity
-        self.y_position += y_velocity
+        if self.x_position == 0 and x_velocity == -1:
+            self.x_position = self.rows - 1
+        elif self.x_position == self.rows - 1 and x_velocity == 1:
+            self.x_position = 0
+        elif self.y_position == 0 and y_velocity == -1:
+            self.y_position = self.rows - 1
+        elif self.y_position == self.rows - 1 and y_velocity == 1:
+            self.y_position = 0
+        else:
+            self.x_position += x_velocity
+            self.y_position += y_velocity
 
     def draw(self, surface):
         """
