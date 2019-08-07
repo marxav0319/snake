@@ -3,7 +3,7 @@ import pygame
 
 from .snake import Snake
 
-DELAY = 10
+DELAY = 50
 TICK = 10
 
 class Game(object):
@@ -28,7 +28,11 @@ class Game(object):
         """
 
         keys = pygame.key.get_pressed()
-        if keys[pygame.K_LEFT]:
+
+        if keys[pygame.K_ESCAPE]:
+            pygame.quit()
+            sys.exit(0)
+        elif keys[pygame.K_LEFT]:
             self.snake.update(-1, 0)
         elif keys[pygame.K_RIGHT]:
             self.snake.update(1, 0)
@@ -36,9 +40,8 @@ class Game(object):
             self.snake.update(0, -1)
         elif keys[pygame.K_DOWN]:
             self.snake.update(0, 1)
-        elif keys[pygame.K_ESCAPE]:
-            pygame.quit()
-            sys.exit(0)
+        else:
+            self.snake.update(self.snake.x_velocity, self.snake.y_velocity)
 
     def draw(self):
         """
@@ -64,6 +67,5 @@ class Game(object):
                     pygame.quit()
                     sys.exit(0)
 
-                self.update()
-
+            self.update()
             self.draw()
