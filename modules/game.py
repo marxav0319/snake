@@ -3,6 +3,9 @@ import pygame
 
 from .snake import Snake
 
+DELAY = 10
+TICK = 10
+
 class Game(object):
     """
     """
@@ -26,13 +29,16 @@ class Game(object):
 
         keys = pygame.key.get_pressed()
         if keys[pygame.K_LEFT]:
-            pass
+            self.snake.update(-1, 0)
         elif keys[pygame.K_RIGHT]:
-            pass
+            self.snake.update(1, 0)
         elif keys[pygame.K_UP]:
-            pass
+            self.snake.update(0, -1)
         elif keys[pygame.K_DOWN]:
-            pass
+            self.snake.update(0, 1)
+        elif keys[pygame.K_ESCAPE]:
+            pygame.quit()
+            sys.exit(0)
 
     def draw(self):
         """
@@ -49,8 +55,8 @@ class Game(object):
         game_is_active = True
 
         while game_is_active:
-            pygame.time.delay(50)
-            self.clock.tick(10)
+            pygame.time.delay(DELAY)
+            self.clock.tick(TICK)
 
             for event in pygame.event.get():
                 # Check if the user wants to quit

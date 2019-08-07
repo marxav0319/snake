@@ -13,11 +13,12 @@ class Cube(object):
         self.color = (0, 255, 0)
         self.fill_area = width // rows
 
-    def update(self):
+    def update(self, x_velocity, y_velocity):
         """
         """
 
-        pass
+        self.x_position += x_velocity
+        self.y_position += y_velocity
 
     def draw(self, surface):
         """
