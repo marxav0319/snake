@@ -1,8 +1,8 @@
 #include <iostream>
 #include "game.h"
 
-Snake::Game::Game(int screenSize_) : status(0), window(nullptr), renderer(nullptr),
-    screenSize(screenSize_)
+Snake::Game::Game(int screenSize_, int rows) : status(0), window(nullptr), renderer(nullptr),
+    screenSize(screenSize_), numberOfRows(rows), gameRunning(true)
 {
     initializeSDL();
     createWindow();
@@ -51,10 +51,21 @@ void Snake::Game::draw()
     SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
     SDL_RenderClear(renderer);
     SDL_RenderPresent(renderer);
-    SDL_Delay(4000);
 }
 
 void Snake::Game::gameLoop()
 {
-    return;
+    while(gameRunning)
+    {
+        SDL_Event event;
+        while(SDL_PollEvent(&event))
+        {
+            if(event.type == SDL_QUIT)
+            {
+                gameRunning = false;
+                SDL_Quit();
+            }
+        }
+        draw();
+    }
 }
