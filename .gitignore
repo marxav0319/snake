@@ -1,1 +1,3 @@
-*.pyc
+SDL2
+build
+bin/*
