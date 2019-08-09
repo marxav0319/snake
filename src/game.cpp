@@ -7,6 +7,8 @@ Snake::Game::Game(int screenSize_, int rows) : status(0), window(nullptr), rende
     initializeSDL();
     createWindow();
     createRenderer();
+    gameObjectSize = screenSize / numberOfRows;
+    player = GameObject(0, 0, gameObjectSize);
 }
 
 Snake::Game::~Game()
@@ -50,6 +52,7 @@ void Snake::Game::draw()
 {
     SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
     SDL_RenderClear(renderer);
+    player.draw(renderer);
     SDL_RenderPresent(renderer);
 }
 
