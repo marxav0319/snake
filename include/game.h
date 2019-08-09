@@ -21,12 +21,13 @@ namespace Snake
         SDL_Window* window;
         SDL_Renderer* renderer;
         bool gameRunning;
-        GameObject player;
+        GameObject* player;
 
         void initializeSDL();
         void createWindow();
         void createRenderer();
         void draw();
+        void quit();
     };
 }
 

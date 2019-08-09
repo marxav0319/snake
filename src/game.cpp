@@ -1,5 +1,6 @@
 #include <iostream>
 #include "game.h"
+#include "player_cube.h"
 
 Snake::Game::Game(int screenSize_, int rows) : status(0), window(nullptr), renderer(nullptr),
     screenSize(screenSize_), numberOfRows(rows), gameRunning(true)
@@ -8,7 +9,7 @@ Snake::Game::Game(int screenSize_, int rows) : status(0), window(nullptr), rende
     createWindow();
     createRenderer();
     gameObjectSize = screenSize / numberOfRows;
-    player = GameObject(0, 0, gameObjectSize);
+    player = new PlayerCube(0, 0, gameObjectSize);
 }
 
 Snake::Game::~Game()
@@ -52,7 +53,7 @@ void Snake::Game::draw()
 {
     SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
     SDL_RenderClear(renderer);
-    player.draw(renderer);
+    player->draw(renderer);
     SDL_RenderPresent(renderer);
 }
 
@@ -64,11 +65,16 @@ void Snake::Game::gameLoop()
         while(SDL_PollEvent(&event))
         {
             if(event.type == SDL_QUIT)
-            {
-                gameRunning = false;
-                SDL_Quit();
-            }
+                quit();
         }
         draw();
     }
+}
+
+void Snake::Game::quit()
+{
+    gameRunning = false;
+    SDL_DestroyRenderer(renderer);
+    SDL_DestroyWindow(window);
+    SDL_Quit();
 }

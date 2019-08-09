@@ -10,13 +10,15 @@ namespace Snake
     public:
         GameObject(){};
         GameObject(int, int, int);
-        ~GameObject();
-        void draw(SDL_Renderer*);
-    private:
+        virtual ~GameObject();
+        virtual void update(int, int) = 0;
+        virtual void draw(SDL_Renderer*);
+    protected:
         int x;
         int y;
         int size;
         SDL_Rect rectangle;
+    private:
     };
 }
 
