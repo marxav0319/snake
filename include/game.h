@@ -3,7 +3,7 @@
 
 #include <SDL2/SDL.h>
 
-#include "game_object.h"
+#include "player_cube.h"
 
 namespace Snake
 {
@@ -14,6 +14,8 @@ namespace Snake
         ~Game();
         void gameLoop();
     private:
+        const int fps = 10;
+
         int screenSize;
         int numberOfRows;
         int gameObjectSize;
@@ -21,11 +23,12 @@ namespace Snake
         SDL_Window* window;
         SDL_Renderer* renderer;
         bool gameRunning;
-        GameObject* player;
+        PlayerCube* player;
 
         void initializeSDL();
         void createWindow();
         void createRenderer();
+        void update();
         void draw();
         void quit();
     };

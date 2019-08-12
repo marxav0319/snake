@@ -11,11 +11,12 @@ namespace Snake
     {
     public:
         PlayerCube(){};
-        PlayerCube(int, int, int);
+        PlayerCube(int, int, int, int, int, int, int);
         ~PlayerCube();
-        virtual void update(int, int);
-        virtual void draw(SDL_Renderer*);
+        virtual void update();
     private:
+        int x_velocity;
+        int y_velocity;
     }; 
 }
 

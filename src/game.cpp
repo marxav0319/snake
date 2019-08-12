@@ -9,7 +9,7 @@ Snake::Game::Game(int screenSize_, int rows) : status(0), window(nullptr), rende
     createWindow();
     createRenderer();
     gameObjectSize = screenSize / numberOfRows;
-    player = new PlayerCube(0, 0, gameObjectSize);
+    player = new PlayerCube(0, 0, gameObjectSize, 0, 255, 0, 255);
 }
 
 Snake::Game::~Game()
@@ -49,9 +49,14 @@ void Snake::Game::createRenderer()
         SDL_RenderSetLogicalSize(renderer, screenSize, screenSize);
 }
 
+void Snake::Game::update()
+{
+    player->update();
+}
+
 void Snake::Game::draw()
 {
-    SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
+    SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
     SDL_RenderClear(renderer);
     player->draw(renderer);
     SDL_RenderPresent(renderer);
@@ -59,15 +64,22 @@ void Snake::Game::draw()
 
 void Snake::Game::gameLoop()
 {
+    int ticks_per_frame = 1000/fps;
     while(gameRunning)
     {
+        int startTime = SDL_GetTicks();
         SDL_Event event;
         while(SDL_PollEvent(&event))
         {
             if(event.type == SDL_QUIT)
                 quit();
         }
+        update();
         draw();
+        int endTime = SDL_GetTicks();
+        int diff = endTime - startTime;
+        if(diff < ticks_per_frame)
+            SDL_Delay(ticks_per_frame - diff);
     }
 }
 

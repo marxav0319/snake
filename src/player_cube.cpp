@@ -1,7 +1,11 @@
+#include <iostream>
 #include "player_cube.h"
 
-Snake::PlayerCube::PlayerCube(int x, int y, int size) : GameObject(x, y, size)
+Snake::PlayerCube::PlayerCube(int x, int y, int size, int r, int g, int b, int a) :
+    GameObject(x, y, size, r, g, b, a)
 {
+    x_velocity = 1;
+    y_velocity = 0;
     return;
 }
 
@@ -10,12 +14,14 @@ Snake::PlayerCube::~PlayerCube()
     return;
 }
 
-void Snake::PlayerCube::update(int x_velocity, int y_velocity)
+void Snake::PlayerCube::update()
 {
-    return;
-}
+    int xPositionUpdate = (size * x_velocity) + x;
+    int yPositionUpdate = (size * y_velocity) + y;
+    x = xPositionUpdate;
+    y = yPositionUpdate;
 
-void Snake::PlayerCube::draw(SDL_Renderer* renderer)
-{
-    Snake::GameObject::draw(renderer);
+    rectangle.x = x;
+    rectangle.y = y;
+    return;
 }
