@@ -1,11 +1,10 @@
 #include <iostream>
 #include "player_cube.h"
 
-Snake::PlayerCube::PlayerCube(int x, int y, int size, int r, int g, int b, int a) :
-    GameObject(x, y, size, r, g, b, a)
+Snake::PlayerCube::PlayerCube(int x, int y, int screenSize_, int rows_, int size, int r, int g, int b,
+    int a, int x_vel, int y_vel) : GameObject(x, y, size, r, g, b, a), screenSize(screenSize_),
+    rows(rows_), xVelocity(x_vel), yVelocity(y_vel)
 {
-    x_velocity = 1;
-    y_velocity = 0;
     return;
 }
 
@@ -14,10 +13,27 @@ Snake::PlayerCube::~PlayerCube()
     return;
 }
 
+Snake::PlayerCube::updateVelocity(int newXVelocity, int newYVelocity)
+{
+    xVelocity = newXVelocity;
+    yVelocity = newYVelocity;
+}
+
 void Snake::PlayerCube::update()
 {
-    int xPositionUpdate = (size * x_velocity) + x;
-    int yPositionUpdate = (size * y_velocity) + y;
+    int xPositionUpdate = (size * xVelocity) + x;
+    int yPositionUpdate = (size * yVelocity) + y;
+
+    if(xPositionUpdate < 0)
+        xPositionUpdate = screenSize - size;
+    else if(xPositionUpdate > screenSize)
+        xPositionUpdate = 0;
+
+    if(yPositionUpdate < 0)
+        yPositionUpdate = screenSize - size;
+    else if(yPositionUpdate > screenSize)
+        yPositionUpdate = 0;
+
     x = xPositionUpdate;
     y = yPositionUpdate;
 

@@ -9,7 +9,7 @@ Snake::Game::Game(int screenSize_, int rows) : status(0), window(nullptr), rende
     createWindow();
     createRenderer();
     gameObjectSize = screenSize / numberOfRows;
-    player = new PlayerCube(0, 0, gameObjectSize, 0, 255, 0, 255);
+    player = new Player(screenSize, rows, gameObjectSize);
 }
 
 Snake::Game::~Game()
@@ -73,6 +73,28 @@ void Snake::Game::gameLoop()
         {
             if(event.type == SDL_QUIT)
                 quit();
+            else if(event.type == SDL_KEYDOWN)
+            {
+                switch(event.key.keysym.sym)
+                {
+                    case SDLK_RIGHT:
+                        player->updateVelocity(1, 0);
+                        break;
+                    case SDLK_LEFT:
+                        player->updateVelocity(-1, 0);
+                        break;
+                    case SDLK_UP:
+                        player->updateVelocity(0, -1);
+                        break;
+                    case SDLK_DOWN:
+                        player->updateVelocity(0, 1);
+                        break;
+                    case SDLK_ESCAPE:
+                        quit();
+                    default:
+                        break;
+                }
+            }
         }
         update();
         draw();
@@ -88,5 +110,6 @@ void Snake::Game::quit()
     gameRunning = false;
     SDL_DestroyRenderer(renderer);
     SDL_DestroyWindow(window);
+    delete player;
     SDL_Quit();
 }
