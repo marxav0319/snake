@@ -11,6 +11,8 @@ namespace Snake
         GameObject(){};
         GameObject(int, int, int, int, int, int, int);
         virtual ~GameObject();
+        int getX(){return x;}
+        int getY(){return y;}
         virtual void draw(SDL_Renderer*);
     protected:
         int x;

@@ -4,6 +4,7 @@
 #include <SDL2/SDL.h>
 
 #include "player.h"
+#include "food.h"
 
 namespace Snake
 {
@@ -23,10 +24,12 @@ namespace Snake
         SDL_Renderer* renderer;
         bool gameRunning;
         Player* player;
+        Food* food;
 
         void initializeSDL();
         void createWindow();
         void createRenderer();
+        void generateFood();
         void update();
         void draw();
         void quit();

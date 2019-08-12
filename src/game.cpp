@@ -1,4 +1,6 @@
 #include <iostream>
+#include <cstdlib>
+#include <ctime>
 #include "game.h"
 #include "player_cube.h"
 
@@ -10,6 +12,8 @@ Snake::Game::Game(int screenSize_, int rows) : status(0), window(nullptr), rende
     createRenderer();
     gameObjectSize = screenSize / numberOfRows;
     player = new Player(screenSize, rows, gameObjectSize);
+    std::srand(std::time(NULL));
+    generateFood();
 }
 
 Snake::Game::~Game()
@@ -49,6 +53,30 @@ void Snake::Game::createRenderer()
         SDL_RenderSetLogicalSize(renderer, screenSize, screenSize);
 }
 
+void Snake::Game::generateFood()
+{
+    bool searchingForValidCoordinates = true;
+    while(searchingForValidCoordinates)
+    {
+        int xCoordinate = (std::rand() % numberOfRows) * gameObjectSize;
+        int yCoordinate = (std::rand() % numberOfRows) * gameObjectSize;
+        bool coordinatesInvalid = false;
+        const std::deque<PlayerCube*>* playerBody = player->getBody();
+
+        for(std::deque<PlayerCube*>::const_iterator it = playerBody->begin(); it != playerBody->end(); ++it)
+        {
+            if((*it)->getX() == xCoordinate && (*it)->getY() == yCoordinate)
+                coordinatesInvalid = true;
+        }
+
+        if(!coordinatesInvalid)
+        {
+            searchingForValidCoordinates = false;
+            food = new Food(xCoordinate, yCoordinate, gameObjectSize);
+        }
+    }
+}
+
 void Snake::Game::update()
 {
     player->update();
@@ -58,6 +86,7 @@ void Snake::Game::draw()
 {
     SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
     SDL_RenderClear(renderer);
+    food->draw(renderer);
     player->draw(renderer);
     SDL_RenderPresent(renderer);
 }
@@ -111,5 +140,6 @@ void Snake::Game::quit()
     SDL_DestroyRenderer(renderer);
     SDL_DestroyWindow(window);
     delete player;
+    delete food;
     SDL_Quit();
 }
