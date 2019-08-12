@@ -77,9 +77,22 @@ void Snake::Game::generateFood()
     }
 }
 
+bool Snake::Game::detectFoodCollision()
+{
+    if(player->getX() == food->getX())
+    {
+        if(player->getY() == food->getY())
+        {
+            delete food;
+            generateFood();
+        }
+    }
+}
+
 void Snake::Game::update()
 {
     player->update();
+    detectFoodCollision();
 }
 
 void Snake::Game::draw()

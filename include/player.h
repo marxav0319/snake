@@ -12,7 +12,9 @@ namespace Snake
     public:
         Player(int, int, int);
         ~Player();
-        const std::deque<PlayerCube*>* getBody(){return &body;}
+        int getX() {return head->getX();}
+        int getY() {return head->getY();}
+        const std::deque<PlayerCube*>* getBody() {return &body;}
         void updateVelocity(int, int);
         void update();
         void draw(SDL_Renderer*);

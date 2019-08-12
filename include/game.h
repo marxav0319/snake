@@ -30,6 +30,7 @@ namespace Snake
         void createWindow();
         void createRenderer();
         void generateFood();
+        bool detectFoodCollision();
         void update();
         void draw();
         void quit();
