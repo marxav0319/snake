@@ -14,6 +14,10 @@ namespace Snake
         PlayerCube(){};
         PlayerCube(int, int, int, int, int, int, int, int, int, int, int);
         ~PlayerCube();
+
+        int getXVelocity() {return xVelocity;}
+        int getYVelocity() {return yVelocity;}
+
         virtual void update();
         bool updateVelocity(Turn*);
     private:

@@ -20,7 +20,6 @@ Snake::Player::~Player()
 
 void Snake::Player::updateVelocity(int newXVelocity, int newYVelocity)
 {
-    // head->updateVelocity(newXVelocity, newYVelocity);
     if(newXVelocity != xVelocity || newYVelocity != yVelocity)
     {
         Turn* tempTurn = new Turn(head->getX(), head->getY(), newXVelocity, newYVelocity);
@@ -28,6 +27,24 @@ void Snake::Player::updateVelocity(int newXVelocity, int newYVelocity)
         this->xVelocity = newXVelocity;
         this->yVelocity = newYVelocity;
     }
+}
+
+void Snake::Player::addBodySegment()
+{
+    PlayerCube* lastSegment = body.back();
+    int segmentXPlacement = lastSegment->getXVelocity() * -1;
+    int segmentYPlacement = lastSegment->getYVelocity() * -1;
+    int newSegmentXPosition = lastSegment->getX();
+    int newSegmentYPosition = lastSegment->getY();
+
+    if(segmentXPlacement != 0)
+        newSegmentXPosition += segmentXPlacement * size;
+    else
+        newSegmentYPosition += segmentYPlacement * size;
+
+    PlayerCube* newSegment = new PlayerCube(newSegmentXPosition, newSegmentYPosition, screenSize,
+        rows, size, size, 0, 255, 0, lastSegment->getXVelocity(), lastSegment->getYVelocity());
+    body.push_back(newSegment);
 }
 
 void Snake::Player::updateBodySegmentVelocities()

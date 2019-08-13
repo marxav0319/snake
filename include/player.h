@@ -17,6 +17,7 @@ namespace Snake
         int getY() {return head->getY();}
         const std::deque<PlayerCube*>* getBody() {return &body;}
         void updateVelocity(int, int);
+        void addBodySegment();
         void update();
         void draw(SDL_Renderer*);
     private:

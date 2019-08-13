@@ -19,6 +19,6 @@ void Snake::GameObject::draw(SDL_Renderer* renderer)
 {
     SDL_SetRenderDrawColor(renderer, red, green, blue, alpha);
     SDL_RenderFillRect(renderer, &rectangle);
-    SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+    SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
     SDL_RenderDrawRect(renderer, &rectangle);
 }

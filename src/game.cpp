@@ -84,6 +84,7 @@ bool Snake::Game::detectFoodCollision()
         if(player->getY() == food->getY())
         {
             delete food;
+            player->addBodySegment();
             generateFood();
         }
     }
