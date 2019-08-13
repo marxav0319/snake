@@ -1,9 +1,9 @@
 #include "player.h"
 
-Snake::Player::Player(int screenSize_, int rows_, int size_) : size(size_), xVelocity(1),
-    yVelocity(0), screenSize(screenSize_), rows(rows_)
+Snake::Player::Player(int screenSize_, int rows_, int size_) : size(size_), screenSize(screenSize_),
+    rows(rows_)
 {
-    head = new PlayerCube(0, 0, screenSize, rows, size, size, 0, 255, 0, xVelocity, yVelocity);
+    head = new PlayerCube(0, 0, screenSize, rows, size, size, 0, 255, 0, 1, 0);
     body.push_back(head);
 }
 
@@ -20,12 +20,10 @@ Snake::Player::~Player()
 
 void Snake::Player::updateVelocity(int newXVelocity, int newYVelocity)
 {
-    if(newXVelocity != xVelocity || newYVelocity != yVelocity)
+    if(newXVelocity != head->getXVelocity() || newYVelocity != head->getYVelocity())
     {
         Turn* tempTurn = new Turn(head->getX(), head->getY(), newXVelocity, newYVelocity);
         turns.push_front(tempTurn);
-        this->xVelocity = newXVelocity;
-        this->yVelocity = newYVelocity;
     }
 }
 

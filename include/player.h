@@ -23,8 +23,6 @@ namespace Snake
         void draw(SDL_Renderer*);
     private:
         int size;
-        int xVelocity;
-        int yVelocity;
         int screenSize;
         int rows;
         PlayerCube* head;
