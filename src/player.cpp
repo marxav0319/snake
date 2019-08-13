@@ -20,11 +20,43 @@ Snake::Player::~Player()
 
 void Snake::Player::updateVelocity(int newXVelocity, int newYVelocity)
 {
-    head->updateVelocity(newXVelocity, newYVelocity);
+    // head->updateVelocity(newXVelocity, newYVelocity);
+    if(newXVelocity != xVelocity || newYVelocity != yVelocity)
+    {
+        Turn* tempTurn = new Turn(head->getX(), head->getY(), newXVelocity, newYVelocity);
+        turns.push_front(tempTurn);
+        this->xVelocity = newXVelocity;
+        this->yVelocity = newYVelocity;
+    }
+}
+
+void Snake::Player::updateBodySegmentVelocities()
+{
+    std::deque<PlayerCube*>::iterator bodyIterator;
+    std::deque<Turn*>::iterator turnIterator;
+    bool firstTurnDone = false;
+    for(bodyIterator = body.begin(); bodyIterator != body.end(); ++bodyIterator)
+    {
+        for(turnIterator = turns.begin(); turnIterator != turns.end(); ++turnIterator)
+        {
+            bool segmentUpdated = false;
+            segmentUpdated = (*bodyIterator)->updateVelocity(*turnIterator);
+            if(segmentUpdated && ((*bodyIterator) == body.back()))
+                firstTurnDone = true;
+        }
+    }
+    
+    if(firstTurnDone)
+    {
+        Turn* tempTurn = turns.back();
+        turns.pop_back();
+        delete tempTurn;
+    }
 }
 
 void Snake::Player::update()
 {
+    updateBodySegmentVelocities();
     for(std::deque<PlayerCube*>::iterator it = body.begin(); it != body.end(); ++it)
         (*it)->update();
 }

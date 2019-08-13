@@ -4,6 +4,7 @@
 #include <SDL2/SDL.h>
 
 #include "game_object.h"
+#include "turn.h"
 
 namespace Snake
 {
@@ -14,7 +15,7 @@ namespace Snake
         PlayerCube(int, int, int, int, int, int, int, int, int, int, int);
         ~PlayerCube();
         virtual void update();
-        updateVelocity(int, int);
+        bool updateVelocity(Turn*);
     private:
         int screenSize;
         int rows;

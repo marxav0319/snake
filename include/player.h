@@ -4,6 +4,7 @@
 #include <deque>
 #include <SDL2/SDL.h>
 #include "player_cube.h"
+#include "turn.h"
 
 namespace Snake
 {
@@ -26,6 +27,9 @@ namespace Snake
         int rows;
         PlayerCube* head;
         std::deque<PlayerCube*> body;
+        std::deque<Turn*> turns;
+
+        void updateBodySegmentVelocities();
     };
 }
 

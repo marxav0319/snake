@@ -13,10 +13,15 @@ Snake::PlayerCube::~PlayerCube()
     return;
 }
 
-Snake::PlayerCube::updateVelocity(int newXVelocity, int newYVelocity)
+bool Snake::PlayerCube::updateVelocity(Turn* turn)
 {
-    xVelocity = newXVelocity;
-    yVelocity = newYVelocity;
+    if(turn->xPosition == this->x && turn->yPosition == this->y)
+    {
+        this->xVelocity = turn->xVelocity;
+        this->yVelocity = turn->yVelocity;
+        return true;
+    }
+    return false;
 }
 
 void Snake::PlayerCube::update()
