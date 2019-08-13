@@ -100,7 +100,7 @@ void Snake::Game::update()
 
 void Snake::Game::draw()
 {
-    SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+    SDL_SetRenderDrawColor(renderer, 43, 9, 32, 255);
     SDL_RenderClear(renderer);
     food->draw(renderer);
     player->draw(renderer);

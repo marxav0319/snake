@@ -3,7 +3,7 @@
 Snake::Player::Player(int screenSize_, int rows_, int size_) : size(size_), screenSize(screenSize_),
     rows(rows_)
 {
-    head = new PlayerCube(0, 0, screenSize, rows, size, size, 0, 255, 0, 1, 0);
+    head = new PlayerCube(0, 0, screenSize, rows, size, 0, 0, 225, 255, 1, 0);
     body.push_back(head);
 }
 
@@ -41,7 +41,7 @@ void Snake::Player::addBodySegment()
         newSegmentYPosition += segmentYPlacement * size;
 
     PlayerCube* newSegment = new PlayerCube(newSegmentXPosition, newSegmentYPosition, screenSize,
-        rows, size, size, 0, 255, 0, lastSegment->getXVelocity(), lastSegment->getYVelocity());
+        rows, size, 100, 149, 237, 255, lastSegment->getXVelocity(), lastSegment->getYVelocity());
     body.push_back(newSegment);
 }
 
