@@ -31,12 +31,12 @@ void Snake::PlayerCube::update()
 
     if(xPositionUpdate < 0)
         xPositionUpdate = screenSize - size;
-    else if(xPositionUpdate > screenSize)
+    else if(xPositionUpdate >= screenSize)
         xPositionUpdate = 0;
 
     if(yPositionUpdate < 0)
         yPositionUpdate = screenSize - size;
-    else if(yPositionUpdate > screenSize)
+    else if(yPositionUpdate >= screenSize)
         yPositionUpdate = 0;
 
     x = xPositionUpdate;

@@ -29,7 +29,6 @@ These are bugs I've found so far, I'm sure there are more but this is from my cu
 1. In certain cases, the snake's body separates, (usually into two pieces) that act independantly
   and do not respond to user input.
 2. In certain cases, the snake backtracking on itself doesn't end the game.
-3. The snake can move an extra row off-screen on the bottom and potentially on the right.
 
 ## Enhancements
 
