@@ -71,6 +71,24 @@ void Snake::Player::updateBodySegmentVelocities()
     }
 }
 
+bool Snake::Player::bodyCollisionDetected()
+{
+    std::deque<PlayerCube*>::iterator bodyIterator = body.begin();
+    bodyIterator++;
+    while(bodyIterator != body.end())
+    {
+        if(head->getX() == (*bodyIterator)->getX())
+        {
+            if(head->getY() == (*bodyIterator)->getY())
+            {
+                return true;
+            }
+        }
+        bodyIterator++;
+    }
+    return false;
+}
+
 void Snake::Player::update()
 {
     updateBodySegmentVelocities();

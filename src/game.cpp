@@ -94,6 +94,8 @@ void Snake::Game::update()
 {
     player->update();
     detectFoodCollision();
+    if(player->bodyCollisionDetected())
+        quit();
 }
 
 void Snake::Game::draw()

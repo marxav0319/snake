@@ -18,6 +18,7 @@ namespace Snake
         const std::deque<PlayerCube*>* getBody() {return &body;}
         void updateVelocity(int, int);
         void addBodySegment();
+        bool bodyCollisionDetected();
         void update();
         void draw(SDL_Renderer*);
     private:
