@@ -10,11 +10,20 @@ Snake::Player::Player(int screenSize_, int rows_, int size_) : size(size_), scre
 Snake::Player::~Player()
 {
     PlayerCube* toDelete;
+    Turn* deleteTurn;
+
     while(!body.empty())
     {
         toDelete = body.front();
         body.pop_front();
         delete toDelete;
+    }
+    
+    while(!turns.empty())
+    {
+        deleteTurn = turns.front();
+        turns.pop_front();
+        delete deleteTurn;
     }
 }
 
