@@ -1,7 +1,11 @@
 # snake
 
-An implementation of the classic game "Snake" in C++ with SDL2.  This is a little personal project
-of mine to keep my C++ skills relatively sharp and learn the SDL2 library.
+An implementation of the classic game "Snake" in C++ with SDL2.  The object of the game is to obtain
+the purple food items while avoiding colliding with the snake's own growing body.  Each time the
+snake consumes a food item, it's body length increases by one square.  Moving to the edge of the
+screen simply makes the snake appear on the opposite side of the screen.  Upon losing the game, the
+game pauses for 1 second, then restarts the game.  To quit the game, simply hit `ESC` or close the
+game window.
 
 ## Progress
 
@@ -21,6 +25,12 @@ I have a makefile with a recipe I used, you may use the same.  I used `mingw g++
 SDL2, then followed the linking process noted in the makefile.  You should also create a `bin`
 directory in the root of this repository, then store the dynamic library `SDL2.dll` in that bin
 directory.  Running `make` will generate the output file `snake.exe`, which you may then run.
+
+The dynamic libraries needed to link for Windows 10 are:
+
++  `libgcc_s_dw2-1.dll` - from `mingw`
++  `libstdc++-6.dll` - from `mingw`
++  `SDL2.dll` - from `SDL2`
 
 ## Bugs
 
