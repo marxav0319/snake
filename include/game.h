@@ -25,6 +25,7 @@ namespace Snake
         bool gameRunning;
         Player* player;
         Food* food;
+        bool playerLost;
 
         void initializeSDL();
         void createWindow();
@@ -33,6 +34,8 @@ namespace Snake
         bool detectFoodCollision();
         void update();
         void draw();
+        void cleanGameObjects();
+        void reset();
         void quit();
     };
 }

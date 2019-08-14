@@ -5,7 +5,7 @@
 #include "player_cube.h"
 
 Snake::Game::Game(int screenSize_, int rows) : status(0), window(nullptr), renderer(nullptr),
-    screenSize(screenSize_), numberOfRows(rows), gameRunning(true)
+    screenSize(screenSize_), numberOfRows(rows), gameRunning(true), playerLost(false)
 {
     initializeSDL();
     createWindow();
@@ -95,7 +95,10 @@ void Snake::Game::update()
     player->update();
     detectFoodCollision();
     if(player->bodyCollisionDetected())
-        quit();
+    {
+        SDL_Delay(1000);
+        reset();
+    }
 }
 
 void Snake::Game::draw()
@@ -117,7 +120,7 @@ void Snake::Game::gameLoop()
         while(SDL_PollEvent(&event))
         {
             if(event.type == SDL_QUIT)
-                quit();
+                gameRunning = false;
             else if(event.type == SDL_KEYDOWN)
             {
                 switch(event.key.keysym.sym)
@@ -135,7 +138,7 @@ void Snake::Game::gameLoop()
                         player->updateVelocity(0, 1);
                         break;
                     case SDLK_ESCAPE:
-                        quit();
+                        gameRunning = false;
                     default:
                         break;
                 }
@@ -148,14 +151,36 @@ void Snake::Game::gameLoop()
         if(diff < ticks_per_frame)
             SDL_Delay(ticks_per_frame - diff);
     }
+    quit();
+}
+
+void Snake::Game::cleanGameObjects()
+{
+    if(player != nullptr)
+    {
+        delete player;
+        player = nullptr;
+    }
+
+    if(food != nullptr)
+    {
+        delete food;
+        food = nullptr;
+    }
+}
+
+void Snake::Game::reset()
+{
+    cleanGameObjects();
+    player = new Player(screenSize, numberOfRows, gameObjectSize);
+    generateFood();
 }
 
 void Snake::Game::quit()
 {
     gameRunning = false;
+    cleanGameObjects();
     SDL_DestroyRenderer(renderer);
     SDL_DestroyWindow(window);
-    delete player;
-    delete food;
     SDL_Quit();
 }
