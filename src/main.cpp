@@ -1,3 +1,11 @@
+/**
+ * main.cpp
+ *
+ * This file holds the main entry point for the snake game. 
+ *
+ * Author: Mark Xavier
+ */
+
 #include <iostream>
 #include <string>
 #include <SDL2/SDL.h>

@@ -1,3 +1,12 @@
+/**
+ * Declares the Food class, which inherits from GameObject.  The food class simply creates a
+ * an SDL_Rect and draws it to the screen.  The game handles moving Food upon consumption.  The
+ * constructor takes an x and a y position, along with a size so that the rectangle (square) can be
+ * drawn.
+ *
+ * Author: Mark Xavier
+ */
+
 #ifndef FOOD_H
 #define FOOD_H
 
@@ -9,7 +18,7 @@ namespace Snake
     {
     public:
         Food(){};
-        Food(int, int, int);
+        Food(int x, int y, int size);
         ~Food(){};
     private:
     };
