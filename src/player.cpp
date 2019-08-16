@@ -4,8 +4,10 @@
 Snake::Player::Player(int screenSize_, int rows_, int size_) : size(size_), screenSize(screenSize_),
     rows(rows_)
 {
-    head = new PlayerCube(0, 0, screenSize, rows, size, 0, 0, 225, 255, 1, 0);
+    head = new PlayerCube(size*2, 0, screenSize, rows, size, 0, 0, 225, 255, 1, 0);
     body.push_back(head);
+    addBodySegment();
+    addBodySegment();
 }
 
 Snake::Player::~Player()
