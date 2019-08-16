@@ -1,3 +1,4 @@
+#include <cstdlib>
 #include "player.h"
 
 Snake::Player::Player(int screenSize_, int rows_, int size_) : size(size_), screenSize(screenSize_),
@@ -29,10 +30,15 @@ Snake::Player::~Player()
 
 void Snake::Player::updateVelocity(int newXVelocity, int newYVelocity)
 {
+    int currentVelocityX = head->getXVelocity();
+    int currentVelocityY = head->getYVelocity();
     if(newXVelocity != head->getXVelocity() || newYVelocity != head->getYVelocity())
     {
-        Turn* tempTurn = new Turn(head->getX(), head->getY(), newXVelocity, newYVelocity);
-        turns.push_front(tempTurn);
+        if((currentVelocityX + newXVelocity != 0) && (currentVelocityY + newYVelocity != 0))
+        {
+            Turn* tempTurn = new Turn(head->getX(), head->getY(), newXVelocity, newYVelocity);
+            turns.push_front(tempTurn);
+        }
     }
 }
 
