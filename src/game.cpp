@@ -63,12 +63,15 @@ void Snake::Game::generateFood()
         bool coordinatesInvalid = false;
         const std::deque<PlayerCube*>* playerBody = player->getBody();
 
+        // Check the snake body to see if the random (x, y) is a body segment location, if it is
+        // we need to recompute a new food location
         for(std::deque<PlayerCube*>::const_iterator it = playerBody->begin(); it != playerBody->end(); ++it)
         {
             if((*it)->getX() == xCoordinate && (*it)->getY() == yCoordinate)
                 coordinatesInvalid = true;
         }
 
+        // If it is a valid coordinate, create the object
         if(!coordinatesInvalid)
         {
             searchingForValidCoordinates = false;
@@ -139,6 +142,10 @@ void Snake::Game::gameLoop()
                         break;
                     case SDLK_ESCAPE:
                         gameRunning = false;
+                        break;
+                    case 'r':
+                        reset();
+                        break;
                     default:
                         break;
                 }
